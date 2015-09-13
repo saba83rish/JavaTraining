@@ -7,7 +7,7 @@ package com.two95.java;
  * @author schand018c
  *
  */
-public class JavaTest {
+public class GeoTest {
 
 	/**
 	 * @param args
