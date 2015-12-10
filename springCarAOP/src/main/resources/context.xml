@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="MichelinTire" class="com.two95.johnu.MichelinTire"></bean>
+	<bean id="GenericTire" class="com.two95.johnu.GenericTire"></bean>
+	<bean id="Engine" class="com.two95.johnu.Engine"></bean>
+	<bean id="Bike" class="com.two95.johnu.Bike"></bean>
+
+	<bean id="GenericCar" class="com.two95.johnu.Car">
+		<constructor-arg ref="GenericTire" />
+		<!-- <constructor-arg ref="Engine" /> -->
+		<property name="color" value=" blue "></property>
+	</bean>
+
+	<bean id="MichelinCar" class="com.two95.johnu.Car">
+		<constructor-arg ref="MichelinTire" />
+		<!-- <constructor-arg ref="Engine" /> -->
+		<property name="color" value="red"></property>
+	</bean>
+
+	<aop:config>
+		<aop:aspect ref="Engine">
+			<aop:pointcut id="enginePointCut" expression="execution(* *.drive(..))" />
+			<aop:before pointcut-ref="enginePointCut" method="startEngine" />
+			<aop:after pointcut-ref="enginePointCut" method="stopEngine" />
+		</aop:aspect>
+	</aop:config>
+
+</beans>
